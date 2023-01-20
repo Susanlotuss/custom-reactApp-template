@@ -2,9 +2,6 @@
 
 import React, { useState, useEffect } from 'react'
 
-// import EditData from './B2BEditing'
-
-// import Useredit from './B2BEditing'
 const initialState = {
   name: '',
   age: '',
@@ -13,12 +10,9 @@ const initialState = {
 }
 
 export default function TotalData(props: {
-  // statusId: any
   getData: any
   setGetData(json: any): unknown
-  // setStatusId: (arg0: any) => void
 }): JSX.Element {
-  // const [getData, setGetData] = useState<any[]>([])
   const [formData, setFormData] = useState(initialState)
   const [statusId, setStatusId] = useState(null)
   const [editData, setEditData] = useState(initialState)
@@ -57,25 +51,6 @@ export default function TotalData(props: {
   function handleEdit(data: any) {
     setStatusId(data.id)
     setEditData(data)
-    /*  async function updateData() {
-      const requestOptions = {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(editData),
-      }
-
-      const response = await fetch(
-        `/api/dataentities/LD/documents/${id}`,
-        requestOptions
-      )
-
-      const datosRes = await response.json()
-
-      return datosRes
-      //  setEditData(data.id)
-    }
-
-    updateData() */
     // eslint-disable-next-line no-console
     console.log(data.id)
   }
@@ -85,7 +60,6 @@ export default function TotalData(props: {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     // eslint-disable-next-line no-console
-    //    console.log(e.target.value)
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -109,7 +83,7 @@ export default function TotalData(props: {
             'Content-Type': 'application/json',
             Accept: 'application/vnd.vtex.ds.v10+json',
             VtexIdclientAutCookie:
-              'eyJhbGciOiJFUzI1NiIsImtpZCI6IkQzNjRFOTJEN0Q0MDRFRkIzRTRGOEI4ODgxOUE0RjJBNjRCMDExMDAiLCJ0eXAiOiJqd3QifQ.eyJzdWIiOiJkaWFubmUubWFydGluZXpAaXRnbG9iZXJzLmNvbSIsImFjY291bnQiOiJpdGdsb2JlcnNwYXJ0bmVyY2wiLCJhdWRpZW5jZSI6ImFkbWluIiwic2VzcyI6IjhiMjFiMzkxLWZmZjQtNDBiNi1iZjg5LWNhNDA2NzY5MzEyZCIsImV4cCI6MTY3MzcwNTc1MiwidXNlcklkIjoiNGRhY2Q3MjgtZTBmNS00Y2JkLWEwNTYtZDdkNGQyMGFmNmJhIiwiaWF0IjoxNjczNjE5MzUyLCJpc3MiOiJ0b2tlbi1lbWl0dGVyIiwianRpIjoiZWNlMmU2MzUtMjYyZS00NTJlLThhNTAtNzIzZmNmYTAzYmRhIn0.qHvzEdTCFXogzAnzLnQRHAEEtUhzME6KvGNtVIzN_Nj523YUWv32vyw96Isrr1yU-d-csQsmLKF42ov2KamSlg',
+              'eyJhbGciOiJFUzI1NiIsImtpZCI6IjYxRTUyQkIyN0YxNTk4NDY1QUEwRENEN0ZDQjUwMUJBMTdFOEE1OTMiLCJ0eXAiOiJqd3QifQ.eyJzdWIiOiJkaWFubmUubWFydGluZXpAaXRnbG9iZXJzLmNvbSIsImFjY291bnQiOiJpdGdsb2JlcnNwYXJ0bmVyY2wiLCJhdWRpZW5jZSI6ImFkbWluIiwic2VzcyI6ImI1MTk0ZmVmLTIyZTUtNGViMS04MDY2LTAyN2MzOTNkYTYzYSIsImV4cCI6MTY3NDMxNzY1MSwidXNlcklkIjoiNGRhY2Q3MjgtZTBmNS00Y2JkLWEwNTYtZDdkNGQyMGFmNmJhIiwiaWF0IjoxNjc0MjMxMjUxLCJpc3MiOiJ0b2tlbi1lbWl0dGVyIiwianRpIjoiZjAxNzk5NjUtMjJiOC00NjFlLWFkNDktM2IxOWFiZTU4OGZjIn0.CiRJCgxQI7yLkUXxe0iRSQZBQeqF5z5t37g1Kjr_ddgtETphkH-5QBdaQpkVW3bF_nWlrsIjsAOdPppcvtrY4Q',
           },
           body: JSON.stringify(formData),
         }
@@ -127,7 +101,6 @@ export default function TotalData(props: {
       console.log(`${formData.name} ${formData.age} ${formData.suscribe}`)
     } else {
       // eslint-disable-next-line no-alert
-      // updateData()
     }
   }
 
@@ -150,7 +123,6 @@ export default function TotalData(props: {
       const datosRes = await response.json()
 
       return datosRes
-      //  setEditData(data.id)
     }
 
     updateData(editData.id)
@@ -179,7 +151,7 @@ export default function TotalData(props: {
   // eslint-disable-next-line no-console
   console.log(inputId)
 
-  const tbData = props.getData.map((data: any) => (
+  /* const tbData = props.getData.map((data: any) => (
     <tr key={data.id}>
       <td
         style={{
@@ -206,7 +178,7 @@ export default function TotalData(props: {
     </tr>
   ))
 
-  return (
+   return (
     <>
       {statusId === null ? (
         <>
@@ -334,6 +306,175 @@ export default function TotalData(props: {
           </tr>
         </thead>
         <tbody>{tbData}</tbody>
+      </div>
+    </>
+  ) */
+  return (
+    <>
+      <h1
+        style={{
+          textAlign: 'center',
+          paddingBottom: '.5rem',
+          paddingTop: '.5rem',
+        }}
+      >
+        Form
+      </h1>
+      <form
+        style={{
+          textAlign: 'center',
+          paddingBottom: '2rem',
+          paddingTop: '.5rem',
+        }}
+        onSubmit={handleSubmit}
+      >
+        <input
+          type="text"
+          placeholder="Ingrese su nombre"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+        />
+        <input
+          type="number"
+          placeholder="Ingrese su edad"
+          name="age"
+          value={formData.age}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          placeholder="Ingrese true o false"
+          name="suscribe"
+          value={formData.suscribe}
+          onChange={handleChange}
+        />
+        <button type="submit">Submit</button>
+        <h3>
+          {formData.name} | {formData.age} | {formData.suscribe}
+        </h3>
+      </form>
+      <div>
+        <form
+          style={{
+            textAlign: 'center',
+            paddingBottom: '2rem',
+            paddingTop: '.5rem',
+          }}
+          onSubmit={handleEditSubmit}
+        >
+          <thead>
+            <tr>
+              <th
+                style={{
+                  width: '100vh',
+                  borderTop: '2px solid #e6e6e6',
+                  paddingBottom: '.5rem',
+                  paddingTop: '.5rem',
+                }}
+              >
+                Name
+              </th>
+              <th
+                style={{
+                  width: '100vh',
+                  borderTop: '2px solid #e6e6e6',
+                  paddingBottom: '.5rem',
+                  paddingTop: '.5rem',
+                }}
+              >
+                Age
+              </th>
+              <th
+                style={{
+                  width: '100vh',
+                  borderTop: '2px solid #e6e6e6',
+                  paddingBottom: '.5rem',
+                  paddingTop: '.5rem',
+                }}
+              >
+                Subscribe
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {props.getData.map((data: any) => (
+              <>
+                {statusId === data.id ? (
+                  <tr>
+                    <td>
+                      <input
+                        type="text"
+                        placeholder="Ingrese su nombre"
+                        name="name"
+                        value={editData.name}
+                        onChange={handleEditChange}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="number"
+                        placeholder="Ingrese su edad"
+                        name="age"
+                        value={editData.age}
+                        onChange={handleEditChange}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        placeholder="Ingrese true o false"
+                        name="suscribe"
+                        value={editData.suscribe}
+                        onChange={handleEditChange}
+                      />
+                    </td>
+                    <td>
+                      <button type="submit">Update</button>
+                    </td>
+                  </tr>
+                ) : (
+                  <tr key={data.id}>
+                    <td
+                      style={{
+                        textAlign: 'center',
+                        paddingBottom: '.5rem',
+                        paddingTop: '.5rem',
+                        borderTop: '2px solid #e6e6e6',
+                      }}
+                    >
+                      {data.name}
+                    </td>
+                    <td
+                      style={{
+                        textAlign: 'center',
+                        borderTop: '2px solid #e6e6e6',
+                      }}
+                    >
+                      {data.age}
+                    </td>
+                    <td
+                      style={{
+                        textAlign: 'center',
+                        borderTop: '2px solid #e6e6e6',
+                      }}
+                    >
+                      {String(data.suscribe)}
+                    </td>
+                    <td>
+                      <button onClick={() => deleteData(data.id)}>
+                        Delete
+                      </button>
+                    </td>
+                    <td>
+                      <button onClick={() => handleEdit(data)}>Edit</button>
+                    </td>
+                  </tr>
+                )}
+              </>
+            ))}
+          </tbody>
+        </form>
       </div>
     </>
   )
