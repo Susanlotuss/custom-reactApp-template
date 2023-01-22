@@ -9,13 +9,21 @@ const initialState = {
   id: null,
 }
 
-export default function TotalData(props: {
-  getData: any
-  setGetData(json: any): unknown
+/* type Data = {
+  name: ''
+  age: ''
+  suscribe: ''
+} */
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export default function TotalData(_props: {
+  // getData: any
+  // setGetData(json: any): unknown
 }): JSX.Element {
   const [formData, setFormData] = useState(initialState)
   const [statusId, setStatusId] = useState(null)
   const [editData, setEditData] = useState(initialState)
+  const [getData, setGetData] = useState<any[]>([])
 
   // eslint-disable-next-line no-console
   console.log(setStatusId, editData, setEditData)
@@ -26,7 +34,7 @@ export default function TotalData(props: {
 
     const json = await (await response).json()
 
-    props.setGetData(json)
+    setGetData(json)
     // eslint-disable-next-line no-console
     console.log(json)
   }
@@ -46,6 +54,7 @@ export default function TotalData(props: {
         getDocs()
       })
     })
+    setGetData(getData.filter((data) => data.id !== id))
   }
 
   function handleEdit(data: any) {
@@ -75,33 +84,44 @@ export default function TotalData(props: {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (formData.id === null) {
-      try {
-        const config = {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/vnd.vtex.ds.v10+json',
-            VtexIdclientAutCookie:
-              'eyJhbGciOiJFUzI1NiIsImtpZCI6IjYxRTUyQkIyN0YxNTk4NDY1QUEwRENEN0ZDQjUwMUJBMTdFOEE1OTMiLCJ0eXAiOiJqd3QifQ.eyJzdWIiOiJkaWFubmUubWFydGluZXpAaXRnbG9iZXJzLmNvbSIsImFjY291bnQiOiJpdGdsb2JlcnNwYXJ0bmVyY2wiLCJhdWRpZW5jZSI6ImFkbWluIiwic2VzcyI6ImI1MTk0ZmVmLTIyZTUtNGViMS04MDY2LTAyN2MzOTNkYTYzYSIsImV4cCI6MTY3NDMxNzY1MSwidXNlcklkIjoiNGRhY2Q3MjgtZTBmNS00Y2JkLWEwNTYtZDdkNGQyMGFmNmJhIiwiaWF0IjoxNjc0MjMxMjUxLCJpc3MiOiJ0b2tlbi1lbWl0dGVyIiwianRpIjoiZjAxNzk5NjUtMjJiOC00NjFlLWFkNDktM2IxOWFiZTU4OGZjIn0.CiRJCgxQI7yLkUXxe0iRSQZBQeqF5z5t37g1Kjr_ddgtETphkH-5QBdaQpkVW3bF_nWlrsIjsAOdPppcvtrY4Q',
-          },
-          body: JSON.stringify(formData),
-        }
+    try {
+      const config = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/vnd.vtex.ds.v10+json',
+          VtexIdclientAutCookie:
+            'eyJhbGciOiJFUzI1NiIsImtpZCI6IjM3QjgzOTRDN0YzNzc0OEI0QjVDRTBGMUM2MUM5RDUyMTYzRUMwNUIiLCJ0eXAiOiJqd3QifQ.eyJzdWIiOiJkaWFubmUubWFydGluZXpAaXRnbG9iZXJzLmNvbSIsImFjY291bnQiOiJpdGdsb2JlcnNwYXJ0bmVyY2wiLCJhdWRpZW5jZSI6ImFkbWluIiwic2VzcyI6ImUzNDY2OWRlLTNhNzEtNDFiYi1iYTJkLTVkMmZjMGViNzJmMyIsImV4cCI6MTY3NDQ5MzMzMCwidXNlcklkIjoiNGRhY2Q3MjgtZTBmNS00Y2JkLWEwNTYtZDdkNGQyMGFmNmJhIiwiaWF0IjoxNjc0NDA2OTMwLCJpc3MiOiJ0b2tlbi1lbWl0dGVyIiwianRpIjoiNTdlYTIxNzUtZDNiMS00ZWQ1LWFhMDUtZjIyNDk1MDZhOTI0In0.XehNj7v7ltGkR1qe8JNtIdmLtJUk50G3raVbXm4N1CAXH3WfJo2vhxE1AIkrHfHAlRUDcAW5TpI8-z0Cz9Q_ew',
+        },
+        body: JSON.stringify(formData),
+      }
 
-        const res = await fetch('/api/dataentities/LD/documents', config)
+      const res = await fetch('/api/dataentities/LD/documents', config)
 
-        const json = await res.json()
-
-        // eslint-disable-next-line no-console
-        console.log(json)
-        // eslint-disable-next-line no-empty
-      } catch (error) {}
+      const json = await res.json()
 
       // eslint-disable-next-line no-console
-      console.log(`${formData.name} ${formData.age} ${formData.suscribe}`)
-    } else {
-      // eslint-disable-next-line no-alert
-    }
+      console.log(json)
+
+      // eslint-disable-next-line no-console
+      console.log(getData, 'hola')
+
+      const newData = {
+        name: formData.name,
+        age: formData.age,
+        suscribe: formData.suscribe,
+      }
+
+      setGetData((prevData) => {
+        return prevData.concat(newData)
+      })
+
+      setFormData(initialState)
+      // eslint-disable-next-line no-empty
+    } catch (error) {}
+
+    // eslint-disable-next-line no-console
+    console.log(`${formData.name} ${formData.age} ${formData.suscribe}`)
   }
 
   const handleEditSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -120,12 +140,24 @@ export default function TotalData(props: {
         requestOptions
       )
 
+      const newData = getData.map((data) => (data.id === id ? editData : data))
+
+      setGetData(newData)
+      setStatusId(null)
+
+      // eslint-disable-next-line no-console
+      console.log('updated')
+
       const datosRes = await response.json()
 
       return datosRes
     }
 
     updateData(editData.id)
+  }
+
+  const handleCancelClick = () => {
+    setStatusId(null)
   }
 
   async function getId(id: any) {
@@ -398,7 +430,7 @@ export default function TotalData(props: {
             </tr>
           </thead>
           <tbody>
-            {props.getData.map((data: any) => (
+            {getData.map((data: any) => (
               <>
                 {statusId === data.id ? (
                   <tr>
@@ -431,6 +463,11 @@ export default function TotalData(props: {
                     </td>
                     <td>
                       <button type="submit">Update</button>
+                    </td>
+                    <td>
+                      <button type="button" onClick={handleCancelClick}>
+                        Cancel
+                      </button>
                     </td>
                   </tr>
                 ) : (

@@ -1,27 +1,27 @@
 /* eslint-disable prettier/prettier */
 
-import React, { useState } from 'react'
+// import React, { useState } from 'react'
 
-import TotalData from './B2BData'
+// import TotalData from './B2BData'
 
 
- type Data = {
+/* type Data = {
   name: '',
   age: '',
   suscribe: '',
-}
+} */
 
-export default function Forms(): JSX.Element {
-  const [statusId, setStatusId] = useState(null)
-  const [getData, setGetData] = useState<Data[]>([])
+// export default function Forms(): JSX.Element {
+  // const [statusId, setStatusId] = useState(null)
+  // const [getData, setGetData] = useState<Data[]>([])
 
 
 // eslint-disable-next-line no-console
-console.log( statusId, getData , setStatusId)
+// console.log( statusId, getData , setStatusId)
 
-  return (
+ /* return (
     <>
-      <TotalData getData={getData} setGetData={setGetData} />
+
     </>
-  )
-}
+  ) */
+// }
